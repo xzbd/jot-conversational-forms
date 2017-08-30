@@ -5,19 +5,10 @@ import {MenuItem, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 
 class Header extends Component {
 
-  login = () => {
-    return this.props.login();
-  };
-
-  logout = () => {
-    return this.props.logout();
-  };
-
-
   render() {
-    let menuItem = <MenuItem onSelect={this.login}>Login</MenuItem>;
+    let menuItem = <MenuItem onSelect={this.props.login}>Login</MenuItem>;
     if (this.props.user.isGenuine) {
-      menuItem = <MenuItem onSelect={this.logout}>Logout</MenuItem>;
+      menuItem = <MenuItem onSelect={this.props.logout}>Logout</MenuItem>;
     }
 
     return (

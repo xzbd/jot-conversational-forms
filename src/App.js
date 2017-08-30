@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 
 import Header from "./components/Header";
-import Body from "./components/Body/Body";
+import Body from "./components/Body";
+import {Alert} from "react-bootstrap";
 
 //Integrate JotForm JS SDK
 const jf = window.JF || null;
@@ -30,7 +31,8 @@ class App extends Component {
   };
 
   handleLogout = () => {
-    alert('Sadly, logout is not working properly due to a deprecated cookie name in JotForm JS SDK. Please delete your cookies manually and refresh..');
+    alert(`Sadly, logout is not working properly due to a deprecated cookie name in JotForm JS SDK.
+    Please delete your cookies manually and refresh..`);
     this.setState({user : guestUser});
   };
 
@@ -45,13 +47,24 @@ class App extends Component {
   render() {
     const isJFIntegrated = jf !== null;
 
+    const loginWarning = (
+      <Alert bsStyle="warning">
+        Please <a href="#" onClick={this.handleLogin}>login</a> and give necessary permission(s)
+        in order to <strong>talk</strong> with your forms.
+      </Alert>
+    );
+
+    const body = <Body login={this.handleLogin}/>;
+
     return (
       isJFIntegrated ? (
         <div className="App">
           <Header user={this.state.user} login={this.handleLogin} logout={this.handleLogout}/>
-          <Body user={this.state.user}/>
+          {
+            this.state.user.isGenuine ? body : loginWarning
+          }
         </div>
-      ) : <div className="App">JotForm integration failed. Are you really connected to internet?</div>
+      ) : <div className="App">JotForm integration failed. Are you really connected to the internet?</div>
     );
   }
 }
