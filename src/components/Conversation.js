@@ -50,12 +50,8 @@ class Conversation extends Component {
 
   scrollToBottom = () => {
     const lastLiNode = ReactDOM.findDOMNode(this.messagesEnd);
-    lastLiNode.scrollIntoView({behavior : "smooth"});
+    lastLiNode.scrollIntoView();
   };
-
-  componentDidMount() {
-    this.scrollToBottom();
-  }
 
   componentDidUpdate() {
     this.scrollToBottom();

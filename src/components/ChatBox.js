@@ -5,6 +5,7 @@ import './ChatBox.css';
 import Conversation from "./Conversation";
 import InputArea from "./InputArea";
 import Message from "./Message";
+import Title from "./Title";
 
 const initialState = {
   messages : []
@@ -14,14 +15,14 @@ class ChatBox extends Component {
 
   counter = 1;
   answerQuestion = () => {
-    const newMessage = <Message key={this.counter} message={this.counter} side={this.counter++ % 2 === 0 ? 'right' : 'left'}/>;
+    const newMessage = <Message key={this.counter} message={this.counter.toString()} side={this.counter++ % 2 === 0 ? 'right' : 'left'}/>;
     this.setState((prevState) => ({
       messages : [...prevState.messages, newMessage]
     }));
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = initialState;
   }
@@ -36,12 +37,11 @@ class ChatBox extends Component {
 
 
   render() {
+    console.log('chatbox Render');
     return (
       <div className="chat_area">
         <div className="chat_window">
-          <div className="top_menu">
-            <div className="title">{this.props.form.title}</div>
-          </div>
+          <Title chatTitle={this.props.form.title}/>
           <Conversation messages={this.state.messages}/>
           <InputArea answerQuestion={this.answerQuestion}/>
         </div>

@@ -14,7 +14,7 @@ const guestUser = {
 };
 
 class App extends Component {
-  _setUser = (jfUser) => {
+  setUser = (jfUser) => {
     this.setState({
       user : {
         name : jfUser.name || 'John Doe', // name may be an empty string
@@ -26,7 +26,10 @@ class App extends Component {
   handleLogin = () => {
     jf.login(() => {
       jf.getUser((jfUser) => {
-        this._setUser(jfUser);
+        this.setUser(jfUser);
+      }, (error) => {
+        alert('An error occured while retrieving user informaion. Please check console if you\'d like..');
+        console.error(error);
       });
     }, (error) => {
       alert('An error occured while logging in via JotForm. Please check console if you\'d like..');
@@ -40,8 +43,8 @@ class App extends Component {
     this.setState({user : guestUser});
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       user : guestUser

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 class Message extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       appeared : false
@@ -14,7 +14,7 @@ class Message extends Component {
   componentDidMount() {
     //For transition effect..
     requestAnimationFrame(() => {
-      this.setState((prevState) => ({appeared : true}));
+      this.setState({appeared : true});
     });
 
   }

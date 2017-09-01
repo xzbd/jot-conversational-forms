@@ -10,13 +10,12 @@ class InputArea extends Component {
   };
 
   render() {
-    console.log('InputArea render');
+    console.log('InputAreaRender');
     return (
       <div className="bottom_wrapper clearfix">
         <div className="message_input_wrapper"><input className="message_input" placeholder="Type your message here..."/></div>
-        <div className="send_message">
-          <div className="icon"/>
-          <div className="text" onClick={this.tryAnswer}>Send</div>
+        <div className="send_message" onClick={this.tryAnswer}>
+          <div className="text">Send</div>
         </div>
       </div>
     );
