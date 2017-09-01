@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+:focus { /* To remove outline.. Looks ugly on Chrome */
+  outline: none !important;
+}
+
+.loading {
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.App {
+  margin-top: 75px;
+  text-align: center;
+}
