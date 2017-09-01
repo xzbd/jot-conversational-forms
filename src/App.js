@@ -15,8 +15,12 @@ const guestUser = {
 
 class App extends Component {
   _setUser = (jfUser) => {
-    Object.assign(jfUser, {isGenuine : true});
-    this.setState({user : jfUser});
+    this.setState({
+      user : {
+        name : jfUser.name || 'John Doe', // name may be an empty string
+        isGenuine : true
+      }
+    });
   };
 
   handleLogin = () => {
@@ -48,7 +52,7 @@ class App extends Component {
     const isJFIntegrated = jf !== null;
 
     const loginWarning = (
-      <Alert bsStyle="warning">
+      <Alert bsStyle="info">
         Please <a href="#" onClick={this.handleLogin}>login</a> and give necessary permission(s)
         in order to <strong>talk</strong> with your forms.
       </Alert>

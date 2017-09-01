@@ -3,17 +3,44 @@ import PropTypes from 'prop-types';
 
 import {Col, Grid} from "react-bootstrap";
 import Forms from "./Forms";
+import ChatBox from "./ChatBox";
+import * as _ from "lodash";
 
-const jf = window.JF || null;
+const jf = window.JF;
 
 class Body extends Component {
 
+  handleFormSelection = (form) => {
+    if (this.state.selectedForm && (this.state.selectedForm.id === form.id)) {
+      return;
+    }
+
+    jf.getFormQuestions(form.id, (jfQuestions) => {
+
+      const questions = _(jfQuestions)
+        .values()
+        .sortBy(function(question) {
+          // Thanks to the API which returns question orders as a string...
+          return question.order / 1;
+        })
+        .value();
+
+      // TODO convert all setStates to this!
+      this.setState((prevState, props) => ({
+        questions : questions,
+        selectedForm : form
+      }));
+
+    });
+
+  };
+
+  // TODO this may move into Forms
   getUserForms = () => {
-    this.setState({formsAreLoaded : false});
-    jf.getForms((response) => {
+    jf.getForms((forms) => {
       this.setState({
-        forms : response,
-        formsAreLoaded : true
+        forms : forms,
+        formsAreLoaded : true,
       });
     });
   };
@@ -25,9 +52,7 @@ class Body extends Component {
       forms : [],
       formsAreLoaded : false
     };
-  }
 
-  componentWillMount() {
     this.getUserForms();
   }
 
@@ -36,9 +61,12 @@ class Body extends Component {
       <div className="Body">
         <Grid>
           <Col xs={12} md={4}>
-            <Forms forms={this.state.forms} loaded={this.state.formsAreLoaded}/>
+            <Forms forms={this.state.forms} loaded={this.state.formsAreLoaded} selectForm={this.handleFormSelection}/>
           </Col>
-          <Col xs={12} md={8}> There will be a conversation area according to selected form..</Col>
+          <Col xs={12} md={8}>
+            {this.state.selectedForm ? <ChatBox form={this.state.selectedForm} questions={this.state.questions}/> :
+             <div>Go ahead pick a form and lets <strong>talk</strong>..</div>}
+          </Col>
         </Grid>
       </div>
     );

@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+:focus { /* To remove outline.. Looks ugly on Chrome */
+  outline: none !important;
+}
+
 .loading {
   animation: spin 2s infinite linear;
 }

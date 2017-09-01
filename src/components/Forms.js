@@ -4,7 +4,6 @@ import {Glyphicon, ListGroup, ListGroupItem} from "react-bootstrap";
 
 class Forms extends Component {
 
-
   prepareForms = () => {
     if (!this.props.loaded) {
       return [<ListGroupItem key={-1}>
@@ -18,7 +17,7 @@ class Forms extends Component {
       listItems.push(<ListGroupItem key={-1}>You don't seem to have any form. You should consider creating one..</ListGroupItem>);
     } else {
       for (let form of forms) {
-        listItems.push(<ListGroupItem key={form.id}>{form.title}</ListGroupItem>);
+        listItems.push(<ListGroupItem key={form.id} onClick={this.props.selectForm.bind(this, form)}>{form.title}</ListGroupItem>);
       }
     }
     return listItems;
@@ -36,7 +35,8 @@ class Forms extends Component {
 
 Forms.propTypes = {
   forms : PropTypes.array.isRequired,
-  loaded : PropTypes.bool.isRequired
+  loaded : PropTypes.bool.isRequired,
+  selectForm : PropTypes.func.isRequired
 };
 
 export default Forms;
