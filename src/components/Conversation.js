@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import * as ReactDOM from "react-dom";
+
 class Conversation extends Component {
 
   /*questionIndexToAsk = 0;
@@ -52,11 +53,10 @@ class Conversation extends Component {
   }
 
   render() {
-    console.log('Conversation render');
     return (
       <ul className="messages">
         {this.props.messages}
-        <li style={{float : "left", clear : "both"}}
+        <li style={{float : "left", clear : "both", marginTop : '10px'}}
             ref={(el) => {
               this.messagesEnd = el;
             }}/>

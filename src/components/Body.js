@@ -23,13 +23,15 @@ class Body extends Component {
 
       const questions = lodash(jfQuestions)
         .values()
+        .filter(function(question) {
+          return lodash.indexOf(supportedQuestionTypes, question.type) > -1;
+        })
         .sortBy(function(question) {
           // Thanks to the API which returns question orders as a string...
           return question.order / 1;
         })
         .value();
 
-      console.log(JSON.stringify(questions));
       this.setState({
         questions : questions,
         selectedForm : form
