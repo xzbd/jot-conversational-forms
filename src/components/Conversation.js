@@ -25,13 +25,7 @@ class Conversation extends Component {
     console.log();
   };
 
-  initiateConversation = () => {
-    const nextQuestion = this.getNextQuestion();
-    if (!nextQuestion) {
-      this.askQuestion({text : "No question to ask??"});
-    }
-    this.askQuestion(nextQuestion);
-  };
+
 
   /!**
    * User Answer is acceptable going to ask a new question (if any)

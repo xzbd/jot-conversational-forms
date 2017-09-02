@@ -61,7 +61,7 @@ class App extends Component {
       </Alert>
     );
 
-    const body = <Body login={this.handleLogin}/>;
+    const body = <Body user={this.state.user} login={this.handleLogin}/>;
 
     return (
       isJFIntegrated ? (

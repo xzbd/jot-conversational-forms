@@ -8,11 +8,14 @@ import lodash from "lodash";
 
 const jf = window.JF;
 
+const supportedQuestionTypes = [
+  'control_textbox',
+];
+
 class Body extends Component {
 
   handleFormSelection = (form) => {
     if (this.state.selectedForm && (this.state.selectedForm.id === form.id)) {
-      console.log('nothing to do');
       return;
     }
 
@@ -26,6 +29,7 @@ class Body extends Component {
         })
         .value();
 
+      console.log(JSON.stringify(questions));
       this.setState({
         questions : questions,
         selectedForm : form
@@ -54,7 +58,7 @@ class Body extends Component {
             <Forms selectForm={this.handleFormSelection}/>
           </Col>
           <Col xs={12} md={8}>
-            {this.state.selectedForm ? <ChatBox form={this.state.selectedForm} questions={this.state.questions}/> :
+            {this.state.selectedForm ? <ChatBox form={this.state.selectedForm} formOwnerName={this.props.user.name} questions={this.state.questions}/> :
              <div>Go ahead pick a form and lets <strong>talk</strong>..</div>}
           </Col>
         </Grid>
@@ -64,7 +68,8 @@ class Body extends Component {
 }
 
 Body.propTypes = {
-  login : PropTypes.func.isRequired
+  login : PropTypes.func.isRequired,
+  user : PropTypes.any.isRequired
 };
 
 export default Body;

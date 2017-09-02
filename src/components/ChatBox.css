@@ -59,8 +59,8 @@
 .chat_area .messages .message {
   clear: both;
   overflow: hidden;
-  margin-bottom: 20px;
-  transition: all 0.5s linear;
+  margin-bottom: 5px;
+  transition: all 0.2s linear;
   opacity: 0;
 }
 
