@@ -10,6 +10,39 @@ const jf = window.JF;
 
 class Body extends Component {
 
+  prepareQuestion = (questionKey, questionText, question) => {
+    return Object.assign({
+      questionKey : questionKey,
+      questionText : questionText
+    }, question);
+  };
+
+  prepareQuestions = (questions) => {
+    let preparedQuestions = [];
+    for (const question of questions) {
+      let jbQuestion;
+      switch (question.type) {
+        case 'control_matrix':
+          //There will be multiple questions..
+          let rows = question.mrows.split('|');
+          for (const [index, row] of rows.entries()) {
+            const questionKey = question.qid + "_" + index;
+            const questionText = question.text + ", being " + row;
+            jbQuestion = this.prepareQuestion(questionKey, questionText, question);
+            preparedQuestions.push(jbQuestion);
+          }
+          break;
+        default:
+          jbQuestion = this.prepareQuestion(question.qid, question.text, question);
+          preparedQuestions.push(jbQuestion);
+          break;
+      }
+    }
+
+    console.log(preparedQuestions);
+    return preparedQuestions;
+  };
+
   handleFormSelection = (form) => {
     if (this.state.selectedForm && (this.state.selectedForm.id === form.id)) {
       console.log('nothing to do');
@@ -27,9 +60,10 @@ class Body extends Component {
         .value();
 
       this.setState({
-        questions : questions,
+        questions : this.prepareQuestions(questions),
         selectedForm : form
-      });
+      })
+      ;
 
     }, (error) => {
       alert('An error occured while getting questions. Please check console if you\'d like..');
