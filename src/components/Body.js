@@ -8,11 +8,40 @@ import lodash from "lodash";
 
 const jf = window.JF;
 
-const supportedQuestionTypes = [
-  'control_textbox',
-];
-
 class Body extends Component {
+
+  prepareQuestion = (questionKey, questionText, question) => {
+    return Object.assign({
+      questionKey : questionKey,
+      questionText : questionText
+    }, question);
+  };
+
+  prepareQuestions = (questions) => {
+    let preparedQuestions = [];
+    for (const question of questions) {
+      let jbQuestion;
+      switch (question.type) {
+        case 'control_matrix':
+          //There will be multiple questions..
+          let rows = question.mrows.split('|');
+          for (const [index, row] of rows.entries()) {
+            const questionKey = question.qid + "_" + index;
+            const questionText = question.text + ", being " + row;
+            jbQuestion = this.prepareQuestion(questionKey, questionText, question);
+            preparedQuestions.push(jbQuestion);
+          }
+          break;
+        default:
+          jbQuestion = this.prepareQuestion(question.qid, question.text, question);
+          preparedQuestions.push(jbQuestion);
+          break;
+      }
+    }
+
+    console.log(preparedQuestions);
+    return preparedQuestions;
+  };
 
   handleFormSelection = (form) => {
     if (this.state.selectedForm && (this.state.selectedForm.id === form.id)) {
@@ -23,9 +52,6 @@ class Body extends Component {
 
       const questions = lodash(jfQuestions)
         .values()
-        .filter(function(question) {
-          return lodash.indexOf(supportedQuestionTypes, question.type) > -1;
-        })
         .sortBy(function(question) {
           // Thanks to the API which returns question orders as a string...
           return question.order / 1;
@@ -33,9 +59,10 @@ class Body extends Component {
         .value();
 
       this.setState({
-        questions : questions,
+        questions : this.prepareQuestions(questions),
         selectedForm : form
-      });
+      })
+      ;
 
     }, (error) => {
       alert('An error occured while getting questions. Please check console if you\'d like..');
