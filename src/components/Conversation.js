@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import * as ReactDOM from "react-dom";
-
 class Conversation extends Component {
 
   /*questionIndexToAsk = 0;
@@ -26,7 +25,13 @@ class Conversation extends Component {
     console.log();
   };
 
-
+  initiateConversation = () => {
+    const nextQuestion = this.getNextQuestion();
+    if (!nextQuestion) {
+      this.askQuestion({text : "No question to ask??"});
+    }
+    this.askQuestion(nextQuestion);
+  };
 
   /!**
    * User Answer is acceptable going to ask a new question (if any)
@@ -53,10 +58,11 @@ class Conversation extends Component {
   }
 
   render() {
+    console.log('Conversation render');
     return (
       <ul className="messages">
         {this.props.messages}
-        <li style={{float : "left", clear : "both", marginTop : '10px'}}
+        <li style={{float : "left", clear : "both"}}
             ref={(el) => {
               this.messagesEnd = el;
             }}/>

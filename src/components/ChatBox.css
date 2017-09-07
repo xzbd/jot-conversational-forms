@@ -1,15 +1,9 @@
-.chat_area:before {
-  float: left;
-  clear: both;
-}
-
 .chat_area {
-  position: relative;
+  margin-top: 500px;
 }
 
 .chat_area * {
   box-sizing: border-box;
-  transition: all 0.2s linear;
 }
 
 .chat_area .top_menu {
@@ -17,6 +11,11 @@
   width: 100%;
   padding: 20px 0 15px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+}
+
+.chat_area .top_menu .buttons {
+  margin: 3px 0 0 20px;
+  position: absolute;
 }
 
 .chat_area .top_menu .buttons .button {
@@ -34,8 +33,15 @@
 }
 
 .chat_area .chat_window {
-  height: 800px;
+  position: absolute;
+  width: calc(100% - 20px);
+  max-width: 800px;
+  height: 500px;
   border-radius: 10px;
+  background-color: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   background-color: #f8f8f8;
   overflow: hidden;
@@ -46,7 +52,7 @@
   list-style: none;
   padding: 20px 10px 0 10px;
   margin: 0;
-  height: 647px;
+  height: 347px;
   overflow: scroll;
 }
 
@@ -54,7 +60,7 @@
   clear: both;
   overflow: hidden;
   margin-bottom: 20px;
-
+  transition: all 0.5s linear;
   opacity: 0;
 }
 
@@ -99,8 +105,8 @@
   text-align: right;
 }
 
-.appeared {
-  opacity: 1 !important;
+.chat_area .messages .message.appeared {
+  opacity: 1;
 }
 
 .chat_area .messages .message .avatar {
@@ -145,9 +151,12 @@
 }
 
 .chat_area .bottom_wrapper {
+  position: relative;
   width: 100%;
   background-color: #fff;
-  padding: 0 20px 20px;
+  padding: 20px 20px;
+  position: absolute;
+  bottom: 0;
 }
 
 .bottom_wrapper .message_input_wrapper {
@@ -194,15 +203,4 @@
   line-height: 48px;
 }
 
-.notVisible {
-  opacity: 0;
-}
 
-.blocked {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.input_and_send{
-  min-height: 50px;
-}
