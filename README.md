@@ -1,4 +1,5 @@
-##Prerequisites:
+
+## Prerequisites:
 
 - **You’ll need to have Node >= 6 on your machine**
 
@@ -18,7 +19,7 @@ Clone the project, `cd` to the project location and finally
 You should have a valid [JotForm](https://jotform.com) account. 
 Or you can use the predefined account for convenience. The credentials are: `vesax@d1yun.com` and `pass`
 
-####Also Important:
+#### Also Important:
 
 - Conversation goes best with the [Event Feedback Form](https://form.jotformpro.com/72497810008962). This form is already created for the account provided above. 
 
