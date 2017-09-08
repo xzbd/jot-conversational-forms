@@ -20,7 +20,6 @@ class Message extends Component {
   }
 
   render() {
-    console.info('render');
     return (
       <li className={'message ' + this.props.side + (this.state.appeared ? ' appeared' : '')}>
         <div className="avatar"/>

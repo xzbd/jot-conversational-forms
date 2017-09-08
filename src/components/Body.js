@@ -8,6 +8,11 @@ import lodash from "lodash";
 
 const jf = window.JF;
 
+const unsupportedQuestionTypes = [
+  'control_head',
+  'control_text'
+];
+
 class Body extends Component {
 
   prepareQuestion = (questionKey, questionText, question) => {
@@ -39,13 +44,11 @@ class Body extends Component {
       }
     }
 
-    console.log(preparedQuestions);
     return preparedQuestions;
   };
 
   handleFormSelection = (form) => {
     if (this.state.selectedForm && (this.state.selectedForm.id === form.id)) {
-      console.log('nothing to do');
       return;
     }
 
@@ -53,6 +56,9 @@ class Body extends Component {
 
       const questions = lodash(jfQuestions)
         .values()
+        .reject(function(question) {
+          return lodash.indexOf(unsupportedQuestionTypes, question.type) > -1;
+        })
         .sortBy(function(question) {
           // Thanks to the API which returns question orders as a string...
           return question.order / 1;

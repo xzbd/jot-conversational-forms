@@ -77,7 +77,6 @@ class ChatBox extends Component {
   calculateDelay = (questionText) => {
     // A professional or good typist hits around 325 to 335 CPM source: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
     const charsPerMin = 330 * 10; // Let JotBot types 10 times faster
-    return 1;
     return Math.floor(questionText.length * 60000 / charsPerMin);
   };
 
@@ -257,7 +256,7 @@ class ChatBox extends Component {
     const scaleFrom = question.scaleFrom || 1;
     const {scaleAmount, fromText, toText,} = question;
     return 'On a scale of ' + scaleFrom + ' to ' + scaleAmount + ' with ' +
-           scaleFrom + ' being the most "' + fromText + '" and ' + scaleAmount + ' being "' + toText + '"; ';
+           scaleFrom + ' being the most "' + fromText + '" and ' + scaleAmount + ' being the most"' + toText + '"; ';
   };
 
   prepareMatrixQuestionPreface = () => {
@@ -302,7 +301,7 @@ class ChatBox extends Component {
     this.prepareToAsk();
     const initialMessages = [
       this.createMessage('Hey there! :) My name\'s JotBot'),
-      this.createMessage('I\'m a super NSI Form Bot, representing ' + this.props.formOwnerName),
+      this.createMessage('I\'m a super NSI Form Bot'),
       this.createMessage('And here to ask you a few questions..'),
       this.createMessage('By the way, NSI stands for "Not So Intelligent".. So please bear with me :)')
     ];
