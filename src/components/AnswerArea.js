@@ -59,8 +59,6 @@ class AnswerArea extends Component {
   };
 
   handleSelectionChange = (values) => {
-    console.log('selectionsRaw');
-    console.log(values);
     var answerArr = [];
     for (const [key, value] of Object.entries(values)) {
       if (value) {

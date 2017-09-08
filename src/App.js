@@ -56,7 +56,7 @@ class App extends Component {
 
     const loginWarning = (
       <Alert bsStyle="info">
-        Please <a href="#" onClick={this.handleLogin}>login</a> and give necessary permission(s)
+        Please <a href="#" onClick={this.handleLogin}><strong>login</strong></a> and give necessary permission(s)
         in order to <strong>talk</strong> with your forms.
       </Alert>
     );

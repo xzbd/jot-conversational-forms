@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 class InputArea extends Component {
 
   tryAnswer = () => {
-    console.log('InputArea.tryAnswer');
-
     this.props.answerQuestion();
   };
 
   render() {
-    console.log('InputAreaRender');
     return (
       <div className="bottom_wrapper clearfix">
         <div className="message_input_wrapper"><input className="message_input" placeholder="Type your message here..."/></div>
