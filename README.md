@@ -10,9 +10,7 @@ you should do this npm dance first
 
 ## How to Run:
 
-Clone the project, `cd` to the project location and finally
-
- `npm start`
+Clone the project, `cd` to the project location then `npm install` \& `npm start`
 
 ## Login:
 
